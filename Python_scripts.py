@@ -2,6 +2,8 @@ from sklearn import preprocessing as pre
 from argparse import ArgumentParser
 from scipy import signal
 
+import matplotlib
+matplotlib.use('agg')
 
 import scipy.io as sio
 import neurokit2 as nk
@@ -111,9 +113,6 @@ def feature_extraction_EEG_end_baseline(file_name_csv,raw,secs):
     EEG.drop(col,axis=1,inplace=True)
     EEG.to_csv(file_name_csv)
     return EEG
-
-
-
 
 
 def driver():
