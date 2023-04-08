@@ -57,6 +57,65 @@ def preprocessing(raw, feature):
     return feature
 
 
+def feature_extraction_EEG(file_name_csv,raw):
+    EEG_tmp=np.zeros((23,18,42))
+    for participant in range(0,23):
+        for video in range(0,18):
+            for i in range(0,14):
+                B,S=[],[]
+                basl=raw['DREAMER'][0,0]['Data'][0,participant]['EEG'][0,0]['baseline'][0,0][video,0][:,i]
+                stim=raw['DREAMER'][0,0]['Data'][0,participant]['EEG'][0,0]['stimuli'][0,0][video,0][:,i]
+                B=preprocessing(basl,B)
+                S=preprocessing(stim,S)
+                Extrod=np.divide(S,B)
+                EEG_tmp[participant,video,3*i]=Extrod[0]
+                EEG_tmp[participant,video,3*i+1]=Extrod[1]
+                EEG_tmp[participant,video,3*i+2]=Extrod[2]
+    col=[]
+    for i in range(0,14):
+        col.append('psdtheta_'+str(i + 1)+'_un')
+        col.append('psdalpha_'+str(i + 1)+'_un')
+        col.append('psdbeta_'+str(i + 1)+'_un')
+    EEG=pd.DataFrame(EEG_tmp.reshape((23 * 18,EEG_tmp.shape[2])),columns=col)
+    scaler=pre.StandardScaler()
+    for i in range(len(col)):
+        EEG[col[i][:-3]]=scaler.fit_transform(EEG[[col[i]]])
+    EEG.drop(col,axis=1,inplace=True)
+    EEG.to_csv(file_name_csv)
+    return EEG
+
+
+def feature_extraction_EEG_end_baseline(file_name_csv,raw,secs):
+    # 128 Hz is the sampling rate for the EEG data
+    fs_EEG = 128
+    N_EEG = math.ceil(fs_EEG*secs)
+    EEG_tmp=np.zeros((23,18,42))
+    for participant in range(0,23):
+        for video in range(0,18):
+            for i in range(0,14):
+                B,S=[],[]
+                basl=raw['DREAMER'][0,0]['Data'][0,participant]['EEG'][0,0]['baseline'][0,0][video,0][-1-N_EEG:-1,i]
+                Extrod=preprocessing(basl,B)
+                EEG_tmp[participant,video,3*i]=Extrod[0]
+                EEG_tmp[participant,video,3*i+1]=Extrod[1]
+                EEG_tmp[participant,video,3*i+2]=Extrod[2]
+    col=[]
+    for i in range(0,14):
+        col.append('psdtheta_'+str(i + 1)+'_un')
+        col.append('psdalpha_'+str(i + 1)+'_un')
+        col.append('psdbeta_'+str(i + 1)+'_un')
+    EEG=pd.DataFrame(EEG_tmp.reshape((23 * 18,EEG_tmp.shape[2])),columns=col)
+    scaler=pre.StandardScaler()
+    for i in range(len(col)):
+        EEG[col[i][:-3]]=scaler.fit_transform(EEG[[col[i]]])
+    EEG.drop(col,axis=1,inplace=True)
+    EEG.to_csv(file_name_csv)
+    return EEG
+
+
+
+
+
 def driver():
     description = "Biosignal Emotions project BHS 2020."
     parser = ArgumentParser(__file__, description)
