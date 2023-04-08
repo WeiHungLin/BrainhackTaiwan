@@ -1,0 +1,51 @@
+(base) linweihung@Macintosh-6 Weihung_Lin_project % git pull  
+Already up to date.
+(base) linweihung@Macintosh-6 Weihung_Lin_project % ls        
+LICENSE		README.md
+(base) linweihung@Macintosh-6 Weihung_Lin_project % git branch iss1
+(base) linweihung@Macintosh-6 Weihung_Lin_project % git branch
+  iss1
+* main
+(base) linweihung@Macintosh-6 Weihung_Lin_project % git checkout iss1
+Switched to branch 'iss1'
+(base) linweihung@Macintosh-6 Weihung_Lin_project % git branch
+* iss1
+  main
+(base) linweihung@Macintosh-6 Weihung_Lin_project % nano README.md
+(base) linweihung@Macintosh-6 Weihung_Lin_project % git status
+On branch iss1
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   README.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+(base) linweihung@Macintosh-6 Weihung_Lin_project % git add README.md
+(base) linweihung@Macintosh-6 Weihung_Lin_project % git commit README.md
+[iss1 4d5eb07] Add Bio in the README.md
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+(base) linweihung@Macintosh-6 Weihung_Lin_project % git push
+fatal: The current branch iss1 has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin iss1
+
+To have this happen automatically for branches without a tracking
+upstream, see 'push.autoSetupRemote' in 'git help config'.
+
+(base) linweihung@Macintosh-6 Weihung_Lin_project % git remote
+origin
+(base) linweihung@Macintosh-6 Weihung_Lin_project % git push origin iss1
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 425 bytes | 425.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+remote: 
+remote: Create a pull request for 'iss1' on GitHub by visiting:
+remote:      https://github.com/WeiHungLin/Weihung_Lin_project/pull/new/iss1
+remote: 
+To github.com:WeiHungLin/Weihung_Lin_project.git
+ * [new branch]      iss1 -> iss1
+(base) linweihung@Macintosh-6 Weihung_Lin_project % 
