@@ -35,5 +35,5 @@ if __name__ == "__main__":
    a = input("Please enter your message: ")
    b = input("Please enter your key: ")
    c = input("Whether this is an encrypt: ")
-   x= process_message(a,b,c)
+   x = process_message(a,b,c)
    print(x)
