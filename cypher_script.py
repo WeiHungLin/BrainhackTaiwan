@@ -13,17 +13,19 @@ parser.add_argument("--mode", action="store", default="enc", type=str,
 results: Namespace = parser.parse_args()
 
 if __name__ == "__main__":
-
-    if results.mode == "enc":
-        results.mode = "True"
-    elif results.mode == "dec":
-        results.mode = "False"
-
    
-    handle = open(results.message)
-    for line in handle:
-        line = line.rstrip()
-        print(UF.process_message(line, results.key, results.mode))
-        print(line)
+    if results.mode == "enc":
+        x = "True"
+        name = results.message.replace(".txt", "_encrypted.txt")
+    elif results.mode == "dec":
+        x = "False"
+        name = results.message.replace(".txt", "_decrypted.txt")
 
-
+    with open(name, 'w') as fp:
+        list =[]
+        handle = open(results.message)
+        for line in handle:
+            line = line.rstrip()
+            ans = UF.process_message(line, results.key, x)
+            print(ans)
+            fp.write("%s\n" % ans)
