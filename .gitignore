@@ -1,2 +1,5 @@
 # Ignore the repository
 /brain_encoding_decoding/
+
+# Ignore the file
+.DS_Store
