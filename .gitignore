@@ -1,5 +1,8 @@
 # Ignore the repository
 /brain_encoding_decoding/
+/ds001747/
+/ds001796/
 
 # Ignore the file
 .DS_Store
+/.3dMVM.dbg.AFNI.args
