@@ -2,7 +2,9 @@
 /brain_encoding_decoding/
 /ds001747/
 /ds001796/
+/nilearn_cache/
 
 # Ignore the file
 .DS_Store
 /.3dMVM.dbg.AFNI.args
+/Final_Project_Unveiling_the_Theory_of_Mind_with_rs_fMRI.ipynb
